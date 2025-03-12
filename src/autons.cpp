@@ -37,10 +37,30 @@ void odom_constants(){
 }
 
 /**
- * The expected behavior is to return to the start position.
+ * the autonomous to be run during skills
  */
 
-void drive_test(){
+void skills_auto(){
+  // Make sure you first get the goal rush out and than do auton ( to get the intake out first )
+    //Skills
+  //     Intake.spin(fwd, 100, percent);
+  //chassis.drive_distance(20, 0, 10, 0); //!Make it faster - 20
+  // chassis.turn_to_angle(90, 4); //!Make it faster - 20
+  // chassis.drive_distance(75, 0, 3, 0);
+  // chassis.turn_to_angle(0, 4); //!Make it faster - 20
+  // chassis.drive_distance(-70, 0, 3, 0);
+  // wait(400, msec);
+  // chassis.drive_distance(40, 0, 3, 0);
+  // chassis.turn_to_angle(-25, 4); //!Make it faster - 20
+  // chassis.drive_distance(-55, 0, 3, 0);
+  // chassis.drive_distance(-30);
+  // chassis.drive_distance(30);
+  // chassis.drive_distance(-100);
+  // Goalrush.spinToPosition(150, degrees, true);
+  // chassis.drive_distance(50);
+  // chassis.turn_to_angle(170);
+  // chassis.drive_distance(10, 0, 5, 0);
+  // Piston.set(true);
   chassis.drive_distance(6);
   chassis.drive_distance(12);
   chassis.drive_distance(18);
@@ -48,10 +68,10 @@ void drive_test(){
 }
 
 /**
- * The expected behavior is to return to the start angle, after making a complete turn.
+ * The autonomous to be ran in a match
  */
 
-void turn_test(){
+void match_auto(){
   chassis.turn_to_angle(5);
   chassis.turn_to_angle(30);
   chassis.turn_to_angle(90);
@@ -60,10 +80,10 @@ void turn_test(){
 }
 
 /**
- * Should swing in a fun S shape.
+ * The default autonomous
  */
 
-void swing_test(){
+void default_auto(){
   chassis.left_swing_to_angle(90);
   chassis.right_swing_to_angle(0);
 }
