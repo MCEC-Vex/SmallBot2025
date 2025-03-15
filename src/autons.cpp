@@ -71,7 +71,7 @@ int colorSortingTask() {
 
 
 bool toSpin = false;
-float speed = 40;
+float speed = 100;
 int ConveyorSpin() {
   while(1){
     
@@ -115,42 +115,42 @@ void skills_auto() {
  vex::task sortTask(colorSortingTask);
  vex::task spinTask(ConveyorSpin);
 
- toSpin = true;
+ //toSpin = true;
 
-//  //get first ring
-//  Intake.spin(fwd, 100, percent);
-//  BeltIntake.stop();
-//  BeltIntake2.stop();
-//  chassis.drive_distance(-48, 0);
+ //get first ring
+ Intake.spin(fwd, 100, percent);
+ BeltIntake.stop();
+ BeltIntake2.stop();
+ chassis.drive_distance(-48, 0);
 
-// //get mogo
-//  chassis.turn_to_angle(90);
-//  chassis.drive_distance(30, 90, 6, 24);
-//   Piston.set(true);
-//  wait(350, msec);
-//  chassis.drive_distance(-8, 90);
+//get mogo
+ chassis.turn_to_angle(90);
+ chassis.drive_distance(30, 90, 6, 24);
+  Piston.set(true);
+ wait(350, msec);
+ chassis.drive_distance(-8, 90);
 
-//   toSpin = true;
-//  wait(700, msec);
-//  chassis.turn_to_angle(180);
-//  chassis.drive_distance(-35, 180);
+  toSpin = true;
+ wait(700, msec);
+ chassis.turn_to_angle(180);
+ chassis.drive_distance(-35, 180);
 
-//  chassis.turn_to_angle(-135);
-//  chassis.drive_distance(-16, -135);
-//  chassis.drive_distance(19, -135);
-//  chassis.turn_to_angle(45);
+ chassis.turn_to_angle(-135);
+ chassis.drive_distance(-16, -135);
+ chassis.drive_distance(19, -135);
+ chassis.turn_to_angle(45);
 
-//  //drive to middle
-// chassis.drive_distance(-50, 45);
-// chassis.drive_distance(-38, 45, 6, 6);
-// chassis.turn_to_angle(-20);
-// chassis.drive_distance(-8, -20, 6, 24);
+ //drive to middle
+chassis.drive_distance(-50, 45);
+chassis.drive_distance(-38, 45, 6, 6);
+chassis.turn_to_angle(-20);
+chassis.drive_distance(-8, -20, 6, 24);
 
-// //drop mogo in corner
-// chassis.drive_distance(6, -20, 6, 24);
-// chassis.turn_to_angle(45);
-// chassis.drive_distance(101, 45);
-// Piston.set(false);
+//drop mogo in corner
+chassis.drive_distance(6, -20, 6, 24);
+chassis.turn_to_angle(45);
+chassis.drive_distance(101, 45);
+Piston.set(false);
 
 }
 
