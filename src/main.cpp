@@ -362,12 +362,12 @@ void usercontrol(void) {
     }
     
     if(Controller1.ButtonR2.pressing()){
-        BeltIntake2.spin(reverse, 50, percent);
-        BeltIntake.spin(reverse, 50, percent);
+        BeltIntake2.spin(reverse, 100, percent);
+        BeltIntake.spin(reverse, 100, percent);
       // Test.spin(fwd, 0, percent);
     } else if(Controller1.ButtonR1.pressing()){
-      BeltIntake.spin(fwd, 100, percent);
-      BeltIntake2.spin(fwd, 100, percent);
+      BeltIntake.spin(fwd, 95, percent);
+      BeltIntake2.spin(fwd, 95, percent);
     } else {
       BeltIntake.spin(fwd, 0, percent);
       BeltIntake2.spin(reverse, 0, percent);

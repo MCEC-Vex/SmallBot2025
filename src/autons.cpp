@@ -71,7 +71,7 @@ int colorSortingTask() {
 
 
 bool toSpin = false;
-float speed = 90;
+float speed = 100;
 int ConveyorSpin() {
   while(1){
     
@@ -125,54 +125,63 @@ void skills_auto() {
 
 //get mogo
  chassis.turn_to_angle(90);
- chassis.drive_distance(30, 90, 6, 24);
+ chassis.drive_distance(40, 90, 6, 24);
   Piston.set(true);
  wait(350, msec);
- chassis.drive_distance(-8, 90);
+ chassis.drive_distance(-18, 90);
 
-toSpin = true;
- wait(850, msec);
+  toSpin = true;
+ wait(700, msec);
  chassis.turn_to_angle(180);
  chassis.drive_distance(-35, 180);
 
  chassis.turn_to_angle(-135);
  chassis.drive_distance(-16, -135);
- wait(240, msec);
  chassis.drive_distance(19, -135);
- wait(240, msec);
  chassis.turn_to_angle(45);
 
-//drive to middle
+ //drive to middle
 chassis.drive_distance(-50, 45);
-chassis.drive_distance(-30, 45, 6, 6);
-wait(100, msec);
+chassis.drive_distance(-38, 45, 6, 6);
 chassis.turn_to_angle(-20);
 chassis.drive_distance(-8, -20, 6, 24);
 
 //drop mogo in corner
-Intake.stop();
 chassis.drive_distance(6, -20, 6, 24);
 chassis.turn_to_angle(45);
-Intake.spin(fwd, 100, percent);
-chassis.drive_distance(10, 45, 5, 5);
-chassis.drive_distance(105, 45);
+chassis.drive_distance(101, 45);
 Piston.set(false);
 
 //get other mogo
 toSpin = false;
 chassis.drive_distance(-14, 45);
 chassis.turn_to_angle(0);
-chassis.drive_distance(-40, 0);
+chassis.drive_distance(-33, 0);
 Intake.spin(fwd, 100, percent);
-chassis.drive_distance(-50, 0);
+chassis.drive_distance(-55, 0);
 
 //actully grab the new mogo
 chassis.turn_to_angle(-90);
 chassis.drive_distance(15, -90);
-chassis.drive_distance(5, -90, 6, 24);
+chassis.drive_distance(25, -90, 6, 4);
 Piston.set(true);
+wait(300, msec);
+  toSpin = true;
+ wait(700, msec);
+chassis.drive_distance(-25, -90, 6, 24);
+chassis.drive_distance(-15, -90);
 
-
+// Mogo at the corner
+chassis.turn_to_angle(0);
+chassis.drive_distance(-30);
+chassis.turn_to_angle(-45); 
+chassis.drive_distance(-20, 0 , 5, 0);
+ wait(300, msec);
+ chassis.drive_distance(20, 0, 5, 0);
+ chassis.turn_to_angle(135);
+ chassis.drive_distance(25, 0, 5, 0);
+Piston.set(false);
+chassis.drive_distance(-20);
 
 
 
