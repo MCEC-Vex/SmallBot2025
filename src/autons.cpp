@@ -71,7 +71,7 @@ int colorSortingTask() {
 
 
 bool toSpin = false;
-float speed = 100;
+float speed = 90;
 int ConveyorSpin() {
   while(1){
     
@@ -85,8 +85,8 @@ int ConveyorSpin() {
       printf("%f\n", BeltIntake.velocity(percent));
       if(std::abs(BeltIntake.velocity(percent)) == 0){
         printf("bruh");
-        BeltIntake.spinFor(reverse, 80, degrees);
-        BeltIntake2.spinFor(reverse, 80, degrees);
+        BeltIntake.spinFor(reverse, 120, degrees);
+        BeltIntake2.spinFor(reverse, 120, degrees);
       }
 
     }else{
@@ -130,27 +130,51 @@ void skills_auto() {
  wait(350, msec);
  chassis.drive_distance(-8, 90);
 
-  toSpin = true;
- wait(700, msec);
+toSpin = true;
+ wait(850, msec);
  chassis.turn_to_angle(180);
  chassis.drive_distance(-35, 180);
 
  chassis.turn_to_angle(-135);
  chassis.drive_distance(-16, -135);
+ wait(240, msec);
  chassis.drive_distance(19, -135);
+ wait(240, msec);
  chassis.turn_to_angle(45);
 
- //drive to middle
+//drive to middle
 chassis.drive_distance(-50, 45);
-chassis.drive_distance(-38, 45, 6, 6);
+chassis.drive_distance(-30, 45, 6, 6);
+wait(100, msec);
 chassis.turn_to_angle(-20);
 chassis.drive_distance(-8, -20, 6, 24);
 
 //drop mogo in corner
+Intake.stop();
 chassis.drive_distance(6, -20, 6, 24);
 chassis.turn_to_angle(45);
-chassis.drive_distance(101, 45);
+Intake.spin(fwd, 100, percent);
+chassis.drive_distance(10, 45, 5, 5);
+chassis.drive_distance(105, 45);
 Piston.set(false);
+
+//get other mogo
+toSpin = false;
+chassis.drive_distance(-14, 45);
+chassis.turn_to_angle(0);
+chassis.drive_distance(-40, 0);
+Intake.spin(fwd, 100, percent);
+chassis.drive_distance(-50, 0);
+
+//actully grab the new mogo
+chassis.turn_to_angle(-90);
+chassis.drive_distance(15, -90);
+chassis.drive_distance(5, -90, 6, 24);
+Piston.set(true);
+
+
+
+
 
 }
 
