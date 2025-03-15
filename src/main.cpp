@@ -10,6 +10,66 @@
 // RightBackDown        motor         16              
 // RightFrontDown       motor         17              
 // RightFrontUp         motor         18              
+// Intake               motor         9               
+// BeltIntake           motor         5               
+// Piston               digital_out   C               
+// BeltIntake2          motor         21              
+// OpticalSensor        optical       7               
+// Inertial10           inertial      10              
+// Goalrush             motor         20              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// RightBackUp          motor         15              
+// LeftBackDown         motor         14              
+// LeftFrontUp          motor         11              
+// LeftFrontDown        motor         12              
+// LeftBackUp           motor         13              
+// RightBackDown        motor         16              
+// RightFrontDown       motor         17              
+// RightFrontUp         motor         18              
+// Intake               motor         9               
+// BeltIntake           motor         5               
+// Piston               digital_out   C               
+// BeltIntake2          motor         21              
+// OpticalSensor        optical       7               
+// Inertial10           inertial      10              
+// Goalrush             motor         20              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// RightBackUp          motor         15              
+// LeftBackDown         motor         14              
+// LeftFrontUp          motor         11              
+// LeftFrontDown        motor         12              
+// LeftBackUp           motor         13              
+// RightBackDown        motor         16              
+// RightFrontDown       motor         17              
+// RightFrontUp         motor         18              
+// Intake               motor         9               
+// BeltIntake           motor         5               
+// Piston               digital_out   C               
+// BeltIntake2          motor         21              
+// OpticalSensor        optical       7               
+// Inertial10           inertial      10              
+// Goalrush             motor         20              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// RightBackUp          motor         15              
+// LeftBackDown         motor         14              
+// LeftFrontUp          motor         11              
+// LeftFrontDown        motor         12              
+// LeftBackUp           motor         13              
+// RightBackDown        motor         16              
+// RightFrontDown       motor         17              
+// RightFrontUp         motor         18              
 // Intake               motor         19              
 // BeltIntake           motor         8               
 // Piston               digital_out   C               
@@ -223,7 +283,7 @@ void autonomous(void) {
 
   switch(current_auton_selection){ 
     case 0:
-       default_auto();
+       skills_auto();
        break;
     case 1:         
       match_auto();
@@ -276,6 +336,15 @@ void usercontrol(void) {
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.
     // ........................................................................
+            if(Brain.Timer >= 29500 && Brain.Timer <= 30000){
+      Controller1.rumble("....");
+    }
+        if(Brain.Timer >= 44500 && Brain.Timer <= 45000){
+      Controller1.rumble("...");
+    }
+        if(Brain.Timer >= 49500 && Brain.Timer <= 50000){
+      Controller1.rumble("...");
+    }
     if(Controller1.ButtonA.pressing()) {
       PistonOpen = !PistonOpen;
       Piston.set(PistonOpen);
@@ -284,19 +353,19 @@ void usercontrol(void) {
 
 
 
-    if(Controller1.ButtonR1.pressing()){
+    if(Controller1.ButtonR2.pressing()){
         Intake.spin(reverse, 100, percent);
-    } else if(Controller1.ButtonR2.pressing()){
+    } else if(Controller1.ButtonR1.pressing()){
         Intake.spin(fwd, 100, percent);
     } else {
         Intake.spin(fwd, 0, percent);
     }
     
-    if(Controller1.ButtonR1.pressing()){
+    if(Controller1.ButtonR2.pressing()){
         BeltIntake2.spin(reverse, 100, percent);
         BeltIntake.spin(reverse, 100, percent);
       // Test.spin(fwd, 0, percent);
-    } else if(Controller1.ButtonR2.pressing()){
+    } else if(Controller1.ButtonR1.pressing()){
       BeltIntake.spin(fwd, 50, percent);
       BeltIntake2.spin(fwd, 50, percent);
     } else {

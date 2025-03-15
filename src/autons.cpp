@@ -1,4 +1,6 @@
 #include "vex.h"
+#include "cmath"
+#include <stdio.h>
 
 /**
  * Resets the constants for auton movement.
@@ -40,31 +42,113 @@ void odom_constants(){
  * the autonomous to be run during skills
  */
 
-void skills_auto(){
-  // Make sure you first get the goal rush out and than do auton ( to get the intake out first )
-    //Skills
-  //     Intake.spin(fwd, 100, percent);
-  //chassis.drive_distance(20, 0, 10, 0); //!Make it faster - 20
-  // chassis.turn_to_angle(90, 4); //!Make it faster - 20
-  // chassis.drive_distance(75, 0, 3, 0);
-  // chassis.turn_to_angle(0, 4); //!Make it faster - 20
-  // chassis.drive_distance(-70, 0, 3, 0);
-  // wait(400, msec);
-  // chassis.drive_distance(40, 0, 3, 0);
-  // chassis.turn_to_angle(-25, 4); //!Make it faster - 20
-  // chassis.drive_distance(-55, 0, 3, 0);
-  // chassis.drive_distance(-30);
-  // chassis.drive_distance(30);
-  // chassis.drive_distance(-100);
-  // Goalrush.spinToPosition(150, degrees, true);
-  // chassis.drive_distance(50);
-  // chassis.turn_to_angle(170);
-  // chassis.drive_distance(10, 0, 5, 0);
-  // Piston.set(true);
-  chassis.drive_distance(6);
-  chassis.drive_distance(12);
-  chassis.drive_distance(18);
-  chassis.drive_distance(-36);
+
+int colorSortingTask() {
+  bool blueRingSpotted = false;
+  OpticalSensor.setLightPower(50);
+  while(true) {
+              if(OpticalSensor.isNearObject() && !blueRingSpotted){
+        if(OpticalSensor.hue() <= 230 && OpticalSensor.hue() >= 100) {
+        Controller1.rumble(".");
+        wait(50, msec);
+        Intake.spin(reverse, 0, percent);
+        BeltIntake2.spin(reverse, 0, percent);
+        BeltIntake.spin(reverse, 0, percent);
+        wait(100, msec);
+
+        Intake.spin(fwd, 100, percent);
+        BeltIntake2.spin(fwd, 100, percent);
+        BeltIntake.spin(fwd, 100, percent);
+        blueRingSpotted = true;
+        wait(200, msec);
+        blueRingSpotted = false;
+        }
+              }
+    wait(20, msec); // Small delay to prevent hogging CPU
+  }
+  return 0;
+}
+
+
+bool toSpin = false;
+float speed = 100;
+int ConveyorSpin() {
+  while(1){
+
+    if(toSpin){
+      BeltIntake2.spin(fwd, speed, percent);
+      BeltIntake.spin(fwd, speed, percent);
+
+      //Controller1.Screen.setCursor(1, 1);
+      //Controller1.Screen.print(std::abs(BeltIntake.velocity(percent)));
+      wait(200, msec);
+
+      if(std::abs(BeltIntake.velocity(percent)) <= speed * 0.25){
+        BeltIntake.spinFor(reverse, 160, degrees);
+        BeltIntake2.spinFor(reverse, 160, degrees);
+        
+      }
+    }else{
+      BeltIntake.stop();
+      BeltIntake2.stop();
+      wait(200, msec);
+    }
+    
+  }
+  return 0;
+}
+
+
+/**
+ * Auton function, which runs the selected auton. Case 0 is the default,
+ * 
+ * and will run in the brain screen goes untouched during preauton. Replace
+ * drive_test(), for example, with your own auton function you created in
+ * autons.cpp and declablue in autons.h.
+ */
+   
+
+void skills_auto() {
+ default_constants();
+ vex::task sortTask(colorSortingTask);
+ vex::task spinTask(ConveyorSpin);
+
+ toSpin = true;
+//  //get first ring
+//  Intake.spin(fwd, 100, percent);
+//  BeltIntake.stop();
+//  BeltIntake2.stop();
+//  chassis.drive_distance(-48, 0);
+
+// //get mogo
+//  chassis.turn_to_angle(90);
+//  chassis.drive_distance(30, 90, 6, 24);
+//   Piston.set(true);
+//  wait(350, msec);
+//  chassis.drive_distance(-8, 90);
+
+//   toSpin = true;
+//  wait(700, msec);
+//  chassis.turn_to_angle(180);
+//  chassis.drive_distance(-35, 180);
+
+//  chassis.turn_to_angle(-135);
+//  chassis.drive_distance(-16, -135);
+//  chassis.drive_distance(19, -135);
+//  chassis.turn_to_angle(45);
+
+//  //drive to middle
+// chassis.drive_distance(-50, 45);
+// chassis.drive_distance(-38, 45, 6, 6);
+// chassis.turn_to_angle(-20);
+// chassis.drive_distance(-8, -20, 6, 24);
+
+// //drop mogo in corner
+// chassis.drive_distance(8, -20, 6, 24);
+// chassis.turn_to_angle(45);
+// chassis.drive_distance(101, 45);
+// Piston.set(false);
+
 }
 
 /**
