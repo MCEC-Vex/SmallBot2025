@@ -71,10 +71,10 @@ int colorSortingTask() {
 
 
 bool toSpin = false;
-float speed = 100;
+float speed = 40;
 int ConveyorSpin() {
   while(1){
-
+    
     if(toSpin){
       BeltIntake2.spin(fwd, speed, percent);
       BeltIntake.spin(fwd, speed, percent);
@@ -82,19 +82,21 @@ int ConveyorSpin() {
       //Controller1.Screen.setCursor(1, 1);
       //Controller1.Screen.print(std::abs(BeltIntake.velocity(percent)));
       wait(200, msec);
-
-      if(std::abs(BeltIntake.velocity(percent)) <= speed * 0.25){
-        BeltIntake.spinFor(reverse, 160, degrees);
-        BeltIntake2.spinFor(reverse, 160, degrees);
-        
+      printf("%f\n", BeltIntake.velocity(percent));
+      if(std::abs(BeltIntake.velocity(percent)) == 0){
+        printf("bruh");
+        BeltIntake.spinFor(reverse, 80, degrees);
+        BeltIntake2.spinFor(reverse, 80, degrees);
       }
+
     }else{
+      printf("mini Exit");
       BeltIntake.stop();
       BeltIntake2.stop();
       wait(200, msec);
     }
-    
   }
+  printf("Exit");
   return 0;
 }
 
@@ -114,6 +116,7 @@ void skills_auto() {
  vex::task spinTask(ConveyorSpin);
 
  toSpin = true;
+
 //  //get first ring
 //  Intake.spin(fwd, 100, percent);
 //  BeltIntake.stop();
@@ -144,7 +147,7 @@ void skills_auto() {
 // chassis.drive_distance(-8, -20, 6, 24);
 
 // //drop mogo in corner
-// chassis.drive_distance(8, -20, 6, 24);
+// chassis.drive_distance(6, -20, 6, 24);
 // chassis.turn_to_angle(45);
 // chassis.drive_distance(101, 45);
 // Piston.set(false);
